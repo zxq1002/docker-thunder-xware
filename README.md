@@ -4,6 +4,8 @@
 
 再也不用担心迅雷扫描你的整块磁盘了.
 
+BY Leon, this is for xware v1, F**K xunlei, v3 was dead
+
 
 ## 使用
 
