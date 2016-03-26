@@ -1,18 +1,15 @@
 # Dockerizing thunder xware
+arm linux版迅雷离线下载 docker 镜像, 只要路由、nas、树莓派等支持docker就可以轻松运行~
 
-迅雷离线下载 docker 镜像, 随便一台能上网的服务器都能成为下载利器哦~
+最初为QNAP TS-231+制作的镜像，内置远程迅雷版本位Xware1.0.31_armel_v5te_glibc。
 
-再也不用担心迅雷扫描你的整块磁盘了.
+## 1、QNAP容器工作站中运行时，只需设置共享目录映射和cpu内存上限即可，允许后可以直接看到容器日志获取激活码。
 
-BY Leon, this is for xware v1, F**K xunlei, v3 was dead
-
-
-## 使用
-
+## 2、命令行运行：
 ### 拉取镜像
 
 ```
-docker pull yinheli/docker-thunder-xware:latest
+docker pull zxq1002/docker-thunder-xware:latest
 ```
 
 ### 创建一个下载目录. 用于挂载卷
@@ -28,7 +25,7 @@ docker run -d \
         --name=xware \
         --net=host \
         -v $(pwd)/data:/app/TDDOWNLOAD \
-        yinheli/docker-thunder-xware
+        zxq1002/docker-thunder-xware
 ```
 
 ### 查看运行情况
@@ -40,7 +37,7 @@ docker ps
 ```
 // output:
 CONTAINER ID        IMAGE                                 COMMAND             CREATED             STATUS              PORTS               NAMES
-c8a3d047af71        yinheli/docker-thunder-xware:latest   "./start.sh"        4 seconds ago       Up 3 seconds                            xware
+c8a3d047af71        zxq1002/docker-thunder-xware:latest   "./start.sh"        4 seconds ago       Up 3 seconds                            xware
 ```
 
 ### 查看日志(激活码)/到迅雷增加设备
