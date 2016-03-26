@@ -1,22 +1,17 @@
 # Dockerizing thunder xware
 # xware version: Xware1.0.16 release date: 2014-08-27
 
-FROM ubuntu:14.04.4
-MAINTAINER yinheli <me@yinheli.com>
+FROM armbuild/ubuntu
+MAINTAINER zhouxq <zxq1002@gmail.com>
 
-# RUN /bin/sed -i.bak 's/archive/cn\.archive/' /etc/apt/sources.list
-RUN grep -v '^#' /etc/apt/sources.list
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh && \
-    apt-get update && apt-get install -y zlib1g-dev lib32z1 lib32ncurses5 && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     mkdir -p /app/bin
 
-COPY thunder /app/
-COPY start.sh /app/
+ADD thunder /app/
+ADD start.sh /app/
 VOLUME /app/TDDOWNLOAD
 
 WORKDIR /app
-RUN chmod +x start.sh && chmod +x ./bin/portal
+RUN ln -s /lib/arm-linux-gnueabihf/ld-linux.so.3 /lib/ld-linux.so.3 && chmod +x start.sh && chmod +x ./bin/portal
 CMD ["./start.sh"]
 
